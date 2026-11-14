@@ -60,16 +60,21 @@
     return Boolean(screens[screenNumber - 1]);
   }
 
+  /* A route is allowed when the screen it depends on has actually been
+     reached. guardOn names the screen whose arrival unlocks this one. */
   function guardFails(info) {
     if (!info || info.screen === 1) return false;
     if (!sectionExists(info.screen)) return true;
     if (info.screen === 2) return state.match !== 'moon';
-    return state.visited[info.guardOn] === true;
+    return state.visited[info.guardOn] !== true;
   }
 
+  /* The earliest screen the child is allowed to see. Used when a route is
+     rejected: send them back to the start of what they have unlocked, never
+     forward to the last screen that happens to pass its guard. */
   function earliestValidRoute() {
     var ordered = C.routes;
-    for (var i = ordered.length - 1; i >= 0; i--) {
+    for (var i = 0; i < ordered.length; i++) {
       if (!guardFails(ordered[i])) return ordered[i].route;
     }
     return 'question';
@@ -111,6 +116,11 @@
 
     state.visited[info.screen] = true;
     saveState();
+
+    if (window.HKB_SCREENS) {
+      window.HKB_SCREENS.attach(state, api);
+      window.HKB_SCREENS.render(info.screen, state);
+    }
 
     renderRail(info.screen);
     focusScreenHeading(info.screen);
@@ -287,13 +297,19 @@
 
     clearError();
     var result = L.classifyQuestion(question);
+
+    // A new question starts a new investigation: the walk, the answers and
+    // the route progress all reset. Carrying the old flags forward let a
+    // fresh question skip straight to a later screen.
+    var fresh = L.readState(null);
     state.firstQuestion = question;
     state.match = result.intent === 'moon-composition' ? 'moon' : 'unknown';
     state.matchReason = result.reason || (result.variant === 'cheese' ? 'cheese' : '');
+    state.answers = fresh.answers;
+    state.visited = fresh.visited;
+    state.nextQuestion = '';
 
     if (state.match === 'moon') {
-      // Screens 2–5 arrive in the next tasks; until then the guard sends the
-      // child back to screen 1 rather than an empty screen.
       hideUnknown();
       saveState();
       navigate('discovery');
@@ -348,6 +364,144 @@
       if (input) input.focus();
     });
   }
+
+  /* ---- shared api for screens.js -------------------------------------- */
+
+  var api = {
+    save: saveState,
+    navigate: navigate,
+    announce: announce,
+    /* Diagnostics only: lets the test page inspect the guard decisions. */
+    debug: function () {
+      return {
+        state: JSON.parse(JSON.stringify(state)),
+        routes: C.routes.map(function (r) {
+          return { route: r.route, screen: r.screen, guardOn: r.guardOn, fails: guardFails(r) };
+        }),
+        earliest: earliestValidRoute(),
+        screensFound: screens.length
+      };
+    }
+  };
+
+  /* ---- navigation buttons (data-action) -------------------------------- */
+
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    if (!target || !target.closest) return;
+
+    var go = target.closest('[data-action="go"]');
+    if (go) {
+      navigate(go.getAttribute('data-to'));
+      return;
+    }
+
+    var back = target.closest('[data-action="back"]');
+    if (back) {
+      var from = Number(back.getAttribute('data-from'));
+      var ordered = C.routes;
+      var prev = ordered[Math.max(0, from - 2)];
+      navigate(prev ? prev.route : 'question');
+    }
+  });
+
+  /* ---- screen 5 ------------------------------------------------------- */
+
+  var nextForm = document.getElementById('next-form');
+  var nextInput = document.getElementById('next-input');
+  var nextError = document.getElementById('next-error');
+
+  function clearNextError() {
+    if (!nextError) return;
+    nextError.hidden = true;
+    nextError.textContent = '';
+    if (nextInput) nextInput.removeAttribute('aria-invalid');
+  }
+
+  if (nextInput) {
+    nextInput.addEventListener('input', function () {
+      if (window.HKB_SCREENS) window.HKB_SCREENS.updateNextCounter();
+      if (nextError && !nextError.hidden) clearNextError();
+      if (window.HKB_SCREENS) window.HKB_SCREENS.hideNextUnknown();
+    });
+  }
+
+  if (nextForm) {
+    nextForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var raw = L.clampInput(nextInput ? nextInput.value : '', C.screen1.maxLength).trim();
+
+      if (L.isBlank(raw)) {
+        if (nextError) {
+          nextError.textContent = C.screen1.validation;
+          nextError.hidden = false;
+        }
+        if (nextInput) {
+          nextInput.setAttribute('aria-invalid', 'true');
+          nextInput.focus();
+        }
+        return;
+      }
+
+      clearNextError();
+      var result = L.classifyQuestion(raw);
+      state.nextQuestion = raw;
+      saveState();
+
+      if (result.intent === 'moon-composition') {
+        state.match = 'moon';
+        state.matchReason = result.variant === 'cheese' ? 'cheese' : 'standard';
+        saveState();
+        navigate('discovery');
+        return;
+      }
+
+      if (window.HKB_SCREENS) window.HKB_SCREENS.showNextUnknown(raw, result, state);
+      announce('That is a great question. This demo does not have a verified answer yet.');
+    });
+  }
+
+  var nextRoute = document.getElementById('next-unknown-route');
+  if (nextRoute) {
+    nextRoute.addEventListener('click', function () {
+      state.match = 'moon';
+      state.matchReason = 'chosen';
+      saveState();
+      if (window.HKB_SCREENS) window.HKB_SCREENS.hideNextUnknown();
+      navigate('discovery');
+    });
+  }
+
+  var nextEdit = document.getElementById('next-unknown-edit');
+  if (nextEdit) {
+    nextEdit.addEventListener('click', function () {
+      if (window.HKB_SCREENS) window.HKB_SCREENS.hideNextUnknown();
+      if (nextInput) nextInput.focus();
+    });
+  }
+
+  var startOver = document.getElementById('start-over');
+  if (startOver) {
+    startOver.addEventListener('click', function () {
+      try { window.sessionStorage.removeItem(STORAGE_KEY); } catch (err) { /* ignore */ }
+      state = L.readState(null);
+      if (input) {
+        input.value = '';
+        updateCounter();
+      }
+      if (nextInput) nextInput.value = '';
+      if (window.HKB_SCREENS) {
+        window.HKB_SCREENS.hideNextUnknown();
+        window.HKB_SCREENS.updateNextCounter();
+      }
+      hideUnknown();
+      clearError();
+      navigate('question', { replace: true });
+    });
+  }
+
+  /* Exposed for the test page and for debugging; the app does not depend on it. */
+  window.HKB_APP = api;
 
   /* ---- boot ----------------------------------------------------------- */
 

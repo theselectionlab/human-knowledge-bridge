@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="dark">
   <title>Human Knowledge Bridge — The Moon Detective</title>
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -82,6 +82,215 @@
         </div>
       </div>
     </section>
+
+    <!-- ================= Screen 2 — The Discovery ================= -->
+    <section class="card" id="screen-discovery" data-screen="2" aria-labelledby="discovery-title" hidden>
+      <div class="card__head">
+        <p class="eyebrow">Screen 2 · The Discovery</p>
+        <h1 id="discovery-title">What is the Moon made of?</h1>
+        <p class="echo" id="discovery-echo" hidden></p>
+      </div>
+
+      <div class="answer">
+        <p class="answer__text">The Moon is made mostly of rock. It has a dusty, rocky surface, a crust, a deep mantle, and a small metallic core.</p>
+        <p class="answer__layer">Like Earth, it has three main layers: a crust, a mantle, and a core.</p>
+      </div>
+
+      <div class="panel panel--cheese" id="cheese-panel" role="region" aria-labelledby="cheese-title" hidden>
+        <h2 class="panel__title" id="cheese-title">Not cheese — Moon rock!</h2>
+        <p>Apollo astronauts brought home real Moon rocks. They are rock and dust, not dairy.</p>
+      </div>
+
+      <section class="panel panel--evidence" aria-labelledby="how-title">
+        <h2 class="panel__title" id="how-title">
+          <svg class="icon icon--magnifier" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          How do we know?
+        </h2>
+        <div class="evidence-grid">
+          <article class="evidence evidence--measured">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path d="M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 17V9m4 8V7m4 10V10m4 7V8m4 9V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <h3>Moon rocks brought home</h3>
+            <p>Apollo astronauts collected 382 kg (842 lb) of Moon rock and soil and brought it to Earth.</p>
+            <span class="chip chip--measured">Direct samples</span>
+          </article>
+          <article class="evidence evidence--inferred">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <h3>Vibrations in the lunar ground</h3>
+            <p>Seismometers recorded moonquakes and meteorite impacts. Scientists used those recordings to infer the Moon’s interior.</p>
+            <span class="chip chip--inferred">Measurements <span aria-hidden="true">→</span> inference</span>
+          </article>
+        </div>
+        <p class="clarifier">The surface is sampled directly. The deep interior is inferred from measurements — no one has opened the Moon to look inside.</p>
+      </section>
+
+      <p class="source-line" id="discovery-sources">
+        Source: <span class="source-list"></span>
+      </p>
+
+      <details class="deeper">
+        <summary>Go deeper</summary>
+        <p>An open question: the Moon’s crust is thicker on the far side than on the near side. Scientists are still working out why.</p>
+      </details>
+
+      <div class="actionbar">
+        <button class="btn btn--secondary" type="button" data-action="back" data-from="2"><span aria-hidden="true">←</span> Back</button>
+        <span class="actionbar__spacer"></span>
+        <button class="btn btn--primary actionbar__primary" type="button" data-action="go" data-to="instrument">Meet the Apollo instrument <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- ================= Screen 3 — The Science Detective ================= -->
+    <section class="card" id="screen-instrument" data-screen="3" aria-labelledby="instrument-title" hidden>
+      <div class="card__head">
+        <p class="eyebrow">Screen 3 · The Science Detective</p>
+        <h1 id="instrument-title">A Science Detective on the Moon</h1>
+      </div>
+
+      <div class="object-card">
+        <div class="object-card__top">
+          <figure class="object-card__figure">
+            <img src="assets/img/pse-diagram.svg?v=7" alt="" width="400" height="250">
+            <figcaption>How a seismometer listens: the ground moves <span aria-hidden="true">→</span> the sensor records <span aria-hidden="true">→</span> scientists study the signal.</figcaption>
+          </figure>
+
+          <div class="object-card__body">
+            <p class="kicker">Real hardware · Apollo 11 · 1969</p>
+            <h2 class="object-card__title">Passive Seismic Experiment (PSE)</h2>
+            <p class="definition"><strong>Seismometer:</strong> an instrument that measures ground movement.</p>
+            <p>In 1969, astronauts left this instrument on the Moon. It listened for tiny vibrations in the lunar ground. Those vibrations gave scientists clues about what happens beneath the Moon’s surface.</p>
+            <ul class="chips" aria-label="Quick facts">
+              <li class="chip chip--fact">First seismometer on the Moon</li>
+              <li class="chip chip--fact">4 sensors</li>
+              <li class="chip chip--fact">Solar-powered</li>
+              <li class="chip chip--fact">3 weeks of data</li>
+            </ul>
+          </div>
+        </div>
+
+        <section class="panel panel--measured" aria-labelledby="measured-title">
+          <h3 id="measured-title">What it measured</h3>
+          <p>Vibrations from moonquakes and meteorite impacts.</p>
+        </section>
+
+        <section class="panel panel--did-not-do" aria-labelledby="didnot-title">
+          <h3 id="didnot-title">What it did not do</h3>
+          <ul class="didnot">
+            <li><span aria-hidden="true">✗</span> See inside the Moon directly.</li>
+            <li><span aria-hidden="true">✗</span> Work through the lunar night.</li>
+            <li><span aria-hidden="true">✗</span> Belong to the later Apollo network.</li>
+          </ul>
+        </section>
+
+        <section class="panel panel--inferred" aria-labelledby="later-title">
+          <h3 id="later-title">Later missions</h3>
+          <p>More advanced seismometers were deployed at Apollo 12, 14, 15, and 16. They sent data until September 1977.</p>
+        </section>
+
+        <p class="analogy">You cannot see through the Moon. But vibrations can help scientists investigate what is hidden inside.</p>
+
+        <p class="matters"><strong>Why this matters:</strong> This is one of the pieces of hardware NASA left on the Moon. Its measurements gave scientists the first detailed look at the Moon’s interior.</p>
+
+        <p class="source-line">Source: <span class="source-list" data-sources="S2"></span></p>
+        <p class="small-note">Apollo 11’s instrument is not the same as the later Apollo seismometers.</p>
+      </div>
+
+      <div class="actionbar">
+        <button class="btn btn--secondary" type="button" data-action="back" data-from="3"><span aria-hidden="true">←</span> Back</button>
+        <span class="actionbar__spacer"></span>
+        <button class="btn btn--primary actionbar__primary" type="button" data-action="go" data-to="evidence">Explore the evidence <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- ================= Screen 4 — The Evidence Scales ================= -->
+    <section class="card" id="screen-evidence" data-screen="4" aria-labelledby="evidence-title" hidden>
+      <div class="card__head">
+        <p class="eyebrow">Screen 4 · Detective Toolkit</p>
+        <h1 id="evidence-title">The Evidence Scales</h1>
+        <p class="lede sub">How do we know what’s true?</p>
+        <p>Sort each claim. There is no penalty for trying. The labels describe how we know, not how important the claim is.</p>
+        <p class="definition"><strong>A claim</strong> is a statement that can be checked.</p>
+      </div>
+
+      <div class="scale-strip" aria-hidden="true">
+        <img src="assets/img/scale.svg?v=7" alt="" width="640" height="200">
+      </div>
+      <p class="caption">Different claims need different kinds of support.</p>
+
+      <p class="sorted" id="sorted-count" role="status" aria-live="polite">Sorted 0 of 3 claims</p>
+
+      <div class="claims" id="claims"></div>
+
+      <section class="panel panel--summary" id="case-summary" role="status" aria-live="off" hidden>
+        <p>Case file complete. You separated what was measured, what was inferred, and what is a model.</p>
+      </section>
+
+      <section class="panel panel--unknown-facts" aria-labelledby="unknowns-title">
+        <h2 class="panel__title" id="unknowns-title">What we still don’t know</h2>
+        <ul>
+          <li>The exact size and makeup of Theia.</li>
+          <li>The Moon’s deep interior in detail.</li>
+          <li>Some details of how the giant impact produced the Moon.</li>
+        </ul>
+        <p class="clarifier">Science has open questions. An unknown is not a fact, and it is not a failure.</p>
+      </section>
+
+      <p class="small-note">A model is not a guess. It is a tool scientists build, test, and revise.</p>
+
+      <div class="actionbar">
+        <button class="btn btn--secondary" type="button" id="reset-scales">Reset the scales</button>
+        <span class="actionbar__spacer"></span>
+        <button class="btn btn--primary actionbar__primary" type="button" data-action="go" data-to="next">Choose my next question <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- ================= Screen 5 — Your Next Question ================= -->
+    <section class="card" id="screen-next" data-screen="5" aria-labelledby="next-title" hidden>
+      <div class="card__head">
+        <p class="eyebrow">Screen 5 · Your investigation continues</p>
+        <h1 id="next-title">Detective, What’s Your Next Question?</h1>
+        <p class="lede sub">Every answer can lead to a new question.</p>
+      </div>
+
+      <section class="panel panel--toolkit" aria-labelledby="toolkit-title">
+        <h2 class="panel__title" id="toolkit-title">Your detective toolkit</h2>
+        <ul class="toolkit">
+          <li><span class="tick" aria-hidden="true">✓</span> Look for evidence</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Separate facts from ideas</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Ask what we still don’t know</li>
+        </ul>
+      </section>
+
+      <form id="next-form" novalidate>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="next-input">What would you like to investigate?</label>
+            <span class="field__count" id="next-count">0 / 240<span class="sr-only"> characters</span></span>
+          </div>
+          <textarea id="next-input" name="next" rows="5" maxlength="240" autocomplete="off" spellcheck="true"
+                    placeholder="Write your own question…" aria-describedby="next-helper next-error"></textarea>
+          <p class="field__error" id="next-error" role="alert" hidden></p>
+        </div>
+        <p class="field__helper" id="next-helper">You choose the next question. No quiz, no right answer.</p>
+
+        <div class="panel panel--unknown" id="next-unknown" role="region" aria-labelledby="next-unknown-title" hidden>
+          <h2 class="panel__title" id="next-unknown-title">That’s a great question.</h2>
+          <div id="next-unknown-body"></div>
+          <p class="echo" id="next-unknown-echo" hidden></p>
+          <div class="panel__actions">
+            <button class="btn btn--primary" type="button" id="next-unknown-route">Explore the Moon investigation</button>
+            <button class="btn btn--secondary" type="button" id="next-unknown-edit">Edit my question</button>
+          </div>
+        </div>
+
+        <div class="actionbar">
+          <button class="btn btn--secondary" type="button" data-action="go" data-to="discovery">Explore the Moon investigation again</button>
+          <button class="btn btn--secondary" type="button" id="start-over">Start over</button>
+          <span class="actionbar__spacer"></span>
+          <button class="btn btn--primary actionbar__primary" type="submit">Investigate my question <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -90,8 +299,9 @@
 
   <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-  <script src="assets/js/content.js" defer></script>
-  <script src="assets/js/logic.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/content.js?v=7" defer></script>
+  <script src="assets/js/logic.js?v=7" defer></script>
+  <script src="assets/js/screens.js?v=7" defer></script>
+  <script src="assets/js/app.js?v=7" defer></script>
 </body>
 </html>

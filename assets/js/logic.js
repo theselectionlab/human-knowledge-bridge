@@ -106,6 +106,17 @@
     });
     out.visited[1] = true;
 
+    // A screen is only reached if the child reached every screen before it.
+    // A stored flag whose predecessor is missing is stale (an older tab, or
+    // a half-written state) and would let a guard skip a screen.
+    for (var step = 2; step <= 5; step++) {
+      if (!out.visited[step - 1]) out.visited[step] = false;
+    }
+    // Screen 2 is reachable only with a matched Moon question; without one,
+    // nothing past screen 1 is reachable and the whole walk is cleared.
+    if (out.match !== 'moon') {
+      out.visited[2] = out.visited[3] = out.visited[4] = out.visited[5] = false;
+    }
 
     return out;
   }

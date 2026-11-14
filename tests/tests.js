@@ -239,6 +239,30 @@
   eq('readState rejects bad answer', restored.answers.c1, null);
   eq('readState clamps long question', L.readState({ version: 1, firstQuestion: 'x'.repeat(500) }).firstQuestion.length, 240);
 
+  // ---------- 8b. readState() enforces the reachability chain ----------
+  // Regression: a stored state with screen 4/5 visited but screen 3 not
+  // reached let a guard jump from screen 2 straight to screen 4.
+  var skipState = L.readState({
+    version: 1, firstQuestion: 'What is the Moon made of?', nextQuestion: '',
+    match: 'moon', matchReason: '',
+    answers: { c1: null, c2: null, c3: null },
+    visited: { 1: true, 2: true, 3: false, 4: true, 5: true }
+  });
+  eq('readState drops unreachable screen 4', skipState.visited[4], false);
+  eq('readState drops unreachable screen 5', skipState.visited[5], false);
+  eq('readState keeps reachable screen 2', skipState.visited[2], true);
+
+  var noMatch = L.readState({ version: 1, match: null, visited: { 2: true, 3: true } });
+  eq('readState drops screen 2 without a Moon match', noMatch.visited[2], false);
+  eq('readState drops screen 3 without a Moon match', noMatch.visited[3], false);
+
+  var chain = L.readState({
+    version: 1, firstQuestion: 'q', match: 'moon', matchReason: '',
+    visited: { 1: true, 2: true, 3: true, 4: true, 5: false }
+  });
+  eq('readState keeps a valid chain through screen 4', chain.visited[4], true);
+  eq('readState keeps screen 5 unvisited', chain.visited[5], false);
+
   // ---------- 9. shouldEcho() / clampInput() / isBlank() ----------
   eq('check question is not echoed', L.shouldEcho('What is the Moon made of?', C.canonicalQuestion), false);
   eq('case/punctuation variant is not echoed', L.shouldEcho('what is the MOON made of', C.canonicalQuestion), false);

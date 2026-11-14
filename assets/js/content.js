@@ -85,5 +85,108 @@ window.HKB_CONTENT = Object.freeze({
     maxLength: 240
   }),
 
-  canonicalQuestion: 'What is the Moon made of?'
+  canonicalQuestion: 'What is the Moon made of?',
+
+  // ---- Screen 2 — The Discovery (04 §2) --------------------------------
+  screen2: Object.freeze({
+    eyebrow: 'Screen 2 · The Discovery',
+    h1: 'What is the Moon made of?',
+    echoPrefix: 'You asked: ',
+    chosenPrefix: 'You chose: ',
+    answer: 'The Moon is made mostly of rock. It has a dusty, rocky surface, a crust, a deep mantle, and a small metallic core.',
+    layer: 'Like Earth, it has three main layers: a crust, a mantle, and a core.',
+    howHeading: 'How do we know?',
+    evidence: Object.freeze([
+      Object.freeze({
+        title: 'Moon rocks brought home',
+        body: 'Apollo astronauts collected 382 kg (842 lb) of Moon rock and soil and brought it to Earth.',
+        chip: 'Direct samples',
+        kind: 'measured',
+        sources: ['S5', 'S1']
+      }),
+      Object.freeze({
+        title: 'Vibrations in the lunar ground',
+        body: 'Seismometers recorded moonquakes and meteorite impacts. Scientists used those recordings to infer the Moon\u2019s interior.',
+        chip: 'Measurements \u2192 inference',
+        kind: 'inference',
+        sources: ['S2', 'S6']
+      })
+    ]),
+    clarifier: 'The surface is sampled directly. The deep interior is inferred from measurements \u2014 no one has opened the Moon to look inside.',
+    farSide: 'An open question: the Moon\u2019s crust is thicker on the far side than on the near side. Scientists are still working out why.',
+    cheeseHeading: 'Not cheese \u2014 Moon rock!',
+    cheeseBody: 'Apollo astronauts brought home real Moon rocks. They are rock and dust, not dairy.',
+    primary: 'Meet the Apollo instrument',
+    back: 'Back'
+  }),
+
+  // ---- Screen 3 — A Science Detective on the Moon (04 §2) --------------
+  screen3: Object.freeze({
+    eyebrow: 'Screen 3 · The Science Detective',
+    h1: 'A Science Detective on the Moon',
+    kicker: 'Real hardware \u00b7 Apollo 11 \u00b7 1969',
+    objectTitle: 'Passive Seismic Experiment (PSE)',
+    definitionTerm: 'Seismometer',
+    definition: 'an instrument that measures ground movement.',
+    body: 'In 1969, astronauts left this instrument on the Moon. It listened for tiny vibrations in the lunar ground. Those vibrations gave scientists clues about what happens beneath the Moon\u2019s surface.',
+    facts: Object.freeze(['First seismometer on the Moon', '4 sensors', 'Solar-powered', '3 weeks of data']),
+    measuredHeading: 'What it measured',
+    measuredBody: 'Vibrations from moonquakes and meteorite impacts.',
+    didNotHeading: 'What it did not do',
+    didNot: Object.freeze([
+      'See inside the Moon directly.',
+      'Work through the lunar night.',
+      'Belong to the later Apollo network.'
+    ]),
+    laterHeading: 'Later missions',
+    laterBody: 'More advanced seismometers were deployed at Apollo 12, 14, 15, and 16. They sent data until September 1977.',
+    analogy: 'You cannot see through the Moon. But vibrations can help scientists investigate what is hidden inside.',
+    mattersHeading: 'Why this matters',
+    mattersBody: 'This is one of the pieces of hardware NASA left on the Moon. Its measurements gave scientists the first detailed look at the Moon\u2019s interior.',
+    sourceId: 'S2',
+    diagramCaption: 'How a seismometer listens: the ground moves \u2192 the sensor records \u2192 scientists study the signal.',
+    smallNote: 'Apollo 11\u2019s instrument is not the same as the later Apollo seismometers.',
+    primary: 'Explore the evidence',
+    back: 'Back'
+  }),
+
+  // ---- Screen 4 — The Evidence Scales (04 §2) --------------------------
+  screen4: Object.freeze({
+    eyebrow: 'Screen 4 · Detective Toolkit',
+    h1: 'The Evidence Scales',
+    sub: 'How do we know what\u2019s true?',
+    intro: 'Sort each claim. There is no penalty for trying. The labels describe how we know, not how important the claim is.',
+    definitionTerm: 'A claim',
+    definition: 'is a statement that can be checked.',
+    caption: 'Different claims need different kinds of support.',
+    unknownLabel: 'Open question',
+    progress: function (n) { return 'Sorted ' + n + ' of 3 claims'; },
+    unknownHeading: 'What we still don\u2019t know',
+    unknowns: Object.freeze([
+      'The exact size and makeup of Theia.',
+      'The Moon\u2019s deep interior in detail.',
+      'Some details of how the giant impact produced the Moon.'
+    ]),
+    unknownClose: 'Science has open questions. An unknown is not a fact, and it is not a failure.',
+    summary: 'Case file complete. You separated what was measured, what was inferred, and what is a model.',
+    small: 'A model is not a guess. It is a tool scientists build, test, and revise.',
+    primary: 'Choose my next question',
+    reset: 'Reset the scales'
+  }),
+
+  // ---- Screen 5 — Your Next Question (04 §2) ---------------------------
+  screen5: Object.freeze({
+    eyebrow: 'Screen 5 · Your investigation continues',
+    h1: 'Detective, What\u2019s Your Next Question?',
+    sub: 'Every answer can lead to a new question.',
+    toolkitHeading: 'Your detective toolkit',
+    toolkit: Object.freeze(['Look for evidence', 'Separate facts from ideas', 'Ask what we still don\u2019t know']),
+    label: 'What would you like to investigate?',
+    placeholder: 'Write your own question\u2026',
+    helper: 'You choose the next question. No quiz, no right answer.',
+    primary: 'Investigate my question',
+    again: 'Explore the Moon investigation again',
+    startOver: 'Start over'
+  })
 });
+
