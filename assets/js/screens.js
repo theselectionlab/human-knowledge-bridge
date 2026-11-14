@@ -137,6 +137,11 @@
     fieldset.appendChild(buttons);
     card.appendChild(fieldset);
 
+    var idle = el('p', 'feedback__idle', 'Choose a label to check your thinking.');
+    idle.setAttribute('aria-hidden', 'true');
+    idle.setAttribute('data-idle', claim.id);
+    card.appendChild(idle);
+
     var feedback = el('div', 'feedback');
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
@@ -159,12 +164,17 @@
     var claim = L.claimById(claimId);
     var box = document.querySelector('.feedback[data-feedback="' + claimId + '"]');
     var card = document.querySelector('.claim[data-claim="' + claimId + '"]');
+    var idle = document.querySelector('.feedback__idle[data-idle="' + claimId + '"]');
     if (!claim || !box || !card) return;
 
     box.textContent = '';
     card.classList.remove('is-correct', 'is-hint');
 
-    if (!labelId) return;
+    if (!labelId) {
+      if (idle) idle.hidden = false;
+      return;
+    }
+    if (idle) idle.hidden = true;
 
     var correct = L.isCorrect(claimId, labelId);
     box.appendChild(svgIcon(correct ? ['M5 12.5 10 17.5 19 6.5'] : ['M6 10a6 6 0 0 1 12 0c0 4-6 3-6 7', 'M12 20.5v.01']));

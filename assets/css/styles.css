@@ -545,7 +545,7 @@ main {
     padding-top: 0;
     justify-content: center;
   }
-  .progress__label { display: none; }
+  .progress__label { display: inline; }
   .sources-link { justify-self: end; }
   /* the brand and the sources link sit in the first header row */
   .header__row { display: contents; }
@@ -1112,6 +1112,17 @@ code {
 
 .feedback { margin-top: var(--s-3); }
 .feedback:empty { display: none; }
+
+/* Quiet pre-answer prompt: guides sighted children without announcing.
+   It lives outside the live region, so screen readers hear nothing
+   until a real answer lands in .feedback. */
+.feedback__idle {
+  margin: var(--s-2) 0 0;
+  font-size: var(--fs-400);
+  color: var(--muted);
+  font-style: italic;
+}
+.feedback__idle[hidden] { display: none; }
 .feedback__text {
   display: inline;
   margin: 0;
