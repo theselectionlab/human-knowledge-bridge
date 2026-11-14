@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A five-screen Science Detective experience about the Moon, the Apollo 11 seismometer, and how we know what we know.">
+  <meta name="color-scheme" content="dark">
+  <title>Human Knowledge Bridge — The Moon Detective</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="header__row">
+        <a class="brand" href="#question">
+          <span class="brand__long">Human Knowledge Bridge</span>
+          <span class="brand__short" aria-hidden="true">HKB · Moon Detective</span>
+          <span class="brand__tag">Evidence Before Narrative</span>
+        </a>
+        <a class="sources-link" href="sources.html">
+          <span class="sources-link__long">Sources &amp; limits</span>
+          <span class="sources-link__short" aria-hidden="true">Sources</span>
+        </a>
+      </div>
+      <nav class="rail" aria-label="Progress">
+        <p class="rail__step" id="rail-step">Step 1 of 5<span class="sr-only">: Question</span></p>
+        <ol class="progress" id="progress"></ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="card" id="screen-question" data-screen="1" aria-labelledby="question-title">
+      <div class="card__head">
+        <p class="eyebrow">Screen 1 · Your curiosity leads</p>
+        <h1 id="question-title">Every discovery begins with a question.</h1>
+        <p class="lede">What are you curious about?</p>
+      </div>
+
+      <form id="question-form" novalidate>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="question-input">Your question</label>
+            <span class="field__count" id="question-count">0 / 240<span class="sr-only"> characters</span></span>
+          </div>
+          <textarea
+            id="question-input"
+            name="question"
+            rows="5"
+            maxlength="240"
+            autocomplete="off"
+            spellcheck="true"
+            placeholder="Type your question here…"
+            aria-describedby="question-helper question-error"></textarea>
+          <p class="field__error" id="question-error" role="alert" hidden></p>
+        </div>
+
+        <button class="chip chip--example" type="button" id="example-chip">
+          <span aria-hidden="true">✦</span> Try an example: What is the Moon made of?
+        </button>
+
+        <p class="field__helper" id="question-helper">You choose the question. This demo has one checked Moon investigation.</p>
+
+        <div class="actionbar">
+          <span class="actionbar__spacer"></span>
+          <button class="btn btn--primary actionbar__primary" type="submit">
+            Explore my question <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="panel panel--unknown" id="unknown-panel" role="region" aria-labelledby="unknown-title" hidden>
+        <h2 class="panel__title" id="unknown-title">That’s a great question.</h2>
+        <div id="unknown-body"></div>
+        <p class="echo" id="unknown-echo" hidden></p>
+        <div class="panel__actions">
+          <button class="btn btn--primary" type="button" id="unknown-route">Explore the Moon investigation</button>
+          <button class="btn btn--secondary" type="button" id="unknown-edit">Edit my question</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>A curated demo for ages 8–12. No live AI. <a href="sources.html">Sources, licenses &amp; limits</a>.</p>
+  </footer>
+
+  <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="assets/js/content.js" defer></script>
+  <script src="assets/js/logic.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
