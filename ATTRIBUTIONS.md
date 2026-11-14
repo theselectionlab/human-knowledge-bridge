@@ -21,7 +21,6 @@ All original work, created for this project, covered by the repository MIT licen
 |---|---|---|
 | `assets/img/pse-diagram.svg` | How a seismometer listens: ground moves, sensor records, scientists study the signal | MIT |
 | `assets/img/scale.svg` | Three evidence labels on one beam, with the open question held separately | MIT |
-| `assets/img/moon.svg` | Decorative Moon illustration | MIT |
 | `assets/img/favicon.svg` | Site icon | MIT |
 
 ## Design reference
