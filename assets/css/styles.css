@@ -798,6 +798,24 @@ code {
   margin-top: var(--s-4);
 }
 
+/* Source links are tap targets: give each its own box with room to hit,
+   however short the page title is. */
+.source-line .source-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-1) var(--s-2);
+}
+.source,
+.feedback__source .source {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: var(--s-1);
+  margin-inline: calc(var(--s-1) * -1);
+}
+.feedback__source { margin-top: 0; }
+
 .deeper {
   margin-top: var(--s-4);
   font-size: var(--fs-400);
