@@ -342,6 +342,8 @@ main {
 
 .brand {
   min-width: 0;
+  min-height: var(--tap);
+  justify-content: center;
   display: inline-flex;
   flex-direction: column;
   color: var(--text);
@@ -452,6 +454,17 @@ main {
   text-transform: none;
 }
 
+/* The footer link is a real tap target: an inline link inside 13px text was
+   15px tall, under the WCAG 2.2 target minimum. Give it its own box. */
+.site-footer p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  margin-block: calc(var(--s-3) * -1);
+  padding-inline: var(--s-1);
+  margin-inline: calc(var(--s-1) * -1);
+}
+
 /* ---- Screen card (C04) ---------------------------------------------- */
 .card[hidden] { display: none; }
 
@@ -539,6 +552,49 @@ main {
   .brand { grid-column: 1; grid-row: 1; justify-self: start; }
   .rail   { grid-column: 2; grid-row: 1; }
   .sources-link { grid-column: 3; grid-row: 1; justify-self: end; }
+}
+
+/* ---- Screen 1 decorative moon (design brief §7.2) -------------------- */
+.card--question {
+  position: relative;
+  overflow: hidden;
+}
+
+.moon {
+  position: absolute;
+  top: calc(var(--s-4) * -1);
+  right: calc(var(--s-5) * -1);
+  width: clamp(120px, 22vw, 200px);
+  height: auto;
+  opacity: 0.55;
+  pointer-events: none;
+  animation: moon-float var(--dur-float) var(--ease) infinite alternate;
+  z-index: 0;
+}
+
+/* Content sits above the illustration; text never overlaps it because the
+   head block reserves the right gutter at every width. */
+.card--question > *:not(.moon) {
+  position: relative;
+  z-index: 1;
+}
+
+.card--question .card__head {
+  padding-right: clamp(0px, 18vw, 168px);
+}
+
+@keyframes moon-float {
+  to { transform: translateY(calc(var(--moon-float) * -1)); }
+}
+
+@media (max-width: 30rem) {
+  .moon {
+    top: calc(var(--s-5) * -1);
+    right: calc(var(--s-6) * -1);
+    width: 128px;
+    opacity: 0.4;
+  }
+  .card--question .card__head { padding-right: 96px; }
 }
 
 /* ---- Form field (C08–C11) ------------------------------------------- */
@@ -951,6 +1007,28 @@ code {
   margin: 0 0 var(--s-4);
 }
 
+/* The scale illustration carries no text of its own (brief §9.1), so its
+   legend lives in HTML: translatable and readable by assistive tech. */
+.scale-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  list-style: none;
+  margin: 0 0 var(--s-2);
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-300);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scale-legend li { display: inline-flex; align-items: center; gap: var(--s-2); }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot--measured { background: var(--measured); }
+.dot--inferred { background: var(--inferred); }
+.dot--model    { background: var(--model); }
+.dot--unknown  { background: var(--unknown); }
+
 .sorted {
   font-family: var(--font-mono);
   font-size: var(--fs-300);
@@ -980,6 +1058,18 @@ code {
 }
 
 .claim__fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+/* Visible instruction on each claim card. The card has to say what to do,
+   not only to a screen reader. */
+.claim__legend {
+  padding: 0;
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-300);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
 .label-btns {
   display: grid;
@@ -1043,6 +1133,22 @@ code {
   background: var(--unknown-tint);
 }
 .panel--unknown-facts ul { padding-left: var(--s-5); margin: 0 0 var(--s-3); }
+
+/* ---- Screen 4: tighter on phones (P1-1) ------------------------------ */
+/* Screen 4 is the longest screen. The visible legends added height, so the
+   claim cards give some back on small viewports. Spacing only: no control
+   gets smaller than 44px and the 8px gap between label buttons stays. */
+@media (max-width: 30rem) {
+  .claim {
+    padding: var(--s-3);
+    margin-bottom: var(--s-3);
+  }
+  .claim__text { margin-bottom: var(--s-3); }
+  .claim__legend { margin-bottom: var(--s-1); }
+  .claim .eyebrow { margin-bottom: 2px; }
+  .scale-strip { padding: var(--s-2); }
+  .panel--unknown-facts ul { margin-bottom: var(--s-2); }
+}
 
 /* ---- Screen 5 -------------------------------------------------------- */
 .panel--toolkit {

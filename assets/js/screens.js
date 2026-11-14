@@ -124,7 +124,10 @@
     card.appendChild(statement);
 
     var fieldset = el('fieldset', 'claim__fieldset');
-    var legend = el('legend', 'sr-only', 'What kind of knowledge is this? Claim ' + (index + 1) + '.');
+    // The legend is visible: the card must tell a sighted child what to do.
+    // The claim number stays screen-reader only so the prompt itself is short.
+    var legend = el('legend', 'claim__legend', 'What kind of knowledge is this?');
+    legend.appendChild(el('span', 'sr-only', ' Claim ' + (index + 1) + '.'));
     fieldset.appendChild(legend);
 
     var buttons = el('div', 'label-btns');

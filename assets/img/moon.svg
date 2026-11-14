@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" aria-hidden="true">
+  <!-- Decorative moon for screen 1. Flat fills only: no gradients, no filters,
+       no text (design brief §9.1). Drawn with circles and short paths. -->
+  <circle cx="120" cy="120" r="82" fill="#1b2b47"/>
+  <circle cx="120" cy="120" r="82" fill="none" stroke="#6b90c6" stroke-width="2" stroke-opacity="0.55"/>
+  <circle cx="120" cy="120" r="70" fill="#c2d0e6" fill-opacity="0.18"/>
+  <circle cx="120" cy="120" r="70" fill="none" stroke="#9cc4ff" stroke-width="2" stroke-opacity="0.7"/>
+
+  <!-- maria: darker patches, flat, clipped by their own radii -->
+  <circle cx="96" cy="94" r="20" fill="#2e4366" fill-opacity="0.75"/>
+  <circle cx="140" cy="112" r="14" fill="#2e4366" fill-opacity="0.75"/>
+  <circle cx="108" cy="148" r="17" fill="#2e4366" fill-opacity="0.75"/>
+  <circle cx="152" cy="146" r="9"  fill="#2e4366" fill-opacity="0.75"/>
+
+  <!-- craters: ring plus inner shadow dot -->
+  <circle cx="86" cy="132" r="9" fill="#16243d" fill-opacity="0.7"/>
+  <circle cx="86" cy="132" r="9" fill="none" stroke="#eef4ff" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="134" cy="82" r="6" fill="#16243d" fill-opacity="0.7"/>
+  <circle cx="134" cy="82" r="6" fill="none" stroke="#eef4ff" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="156" cy="120" r="4" fill="#16243d" fill-opacity="0.7"/>
+  <circle cx="156" cy="120" r="4" fill="none" stroke="#eef4ff" stroke-width="1.5" stroke-opacity="0.5"/>
+
+  <!-- one small orbit arc: the "bridge" idea, kept subtle -->
+  <path d="M46 120 a74 74 0 0 0 148 0" fill="none" stroke="#ffd166" stroke-width="2"
+        stroke-opacity="0.35" stroke-linecap="round" stroke-dasharray="4 9"/>
+  <circle cx="194" cy="120" r="4" fill="#ffd166" fill-opacity="0.8"/>
+</svg>
